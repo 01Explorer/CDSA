@@ -14,16 +14,18 @@ public class Main {
 //        List<Integer> hay = arrayGenerator(size, sorted);
 //        System.out.printf("%nResult --> %d", binarySearch(hay, new Random().nextInt(0, size)));
 
-        List<Object> list = List.of(1, 2, 3, List.of(4,5,6), 7, List.of(8, List.of(9, 10, 11, List.of(12, 13, 14))), List.of(15, 16, 17, 18, 19, List.of(20, 21, 22, List.of(23, 24, 25, List.of(26, 27, 29), 30, 31)),32), 33);
+//        List<Object> list = List.of(1, 2, 3, List.of(4,5,6), 7, List.of(8, List.of(9, 10, 11, List.of(12, 13, 14))), List.of(15, 16, 17, 18, 19, List.of(20, 21, 22, List.of(23, 24, 25, List.of(26, 27, 29), 30, 31)),32), 33);
 
-//        System.out.printf("%nResult --> %s", reverseString("Car"));
-        recursivePrint(list, 1);
+        System.out.printf("%nResult --> %s", findNumberOfShortestPaths(3, 3));
+//        recursivePrint(list, 1);
+
+
     }
 
     private static List<Integer> arrayGenerator(int size, boolean sorted) {
         Random random = new Random();
         List<Integer> result = new ArrayList<>();
-        while(result.size() < size){
+        while (result.size() < size) {
             result.add(random.nextInt(0, size));
         }
 
@@ -75,21 +77,21 @@ public class Main {
         return -1;
     }
 
-    private static List<Integer> intersectionArray(List<Integer> array1, List<Integer> array2){
+    private static List<Integer> intersectionArray(List<Integer> array1, List<Integer> array2) {
         int steps = 0;
         List<Integer> biggest = array1.size() >= array2.size() ? array1 : array2;
         List<Integer> smallest = array1.size() < array2.size() ? array1 : array2;
         HashMap<Integer, Boolean> reference = new HashMap<>();
 
-        for (Integer num : biggest){
+        for (Integer num : biggest) {
             steps++;
             reference.put(num, true);
         }
 
         List<Integer> result = new ArrayList<>();
-        for (Integer num : smallest){
+        for (Integer num : smallest) {
             steps++;
-            if (reference.containsKey(num)){
+            if (reference.containsKey(num)) {
                 result.add(num);
             }
         }
@@ -97,12 +99,12 @@ public class Main {
         return result;
     }
 
-    private static String findFirstDuplicated(List<String> strings){
+    private static String findFirstDuplicated(List<String> strings) {
         int steps = 0;
         HashMap<String, Boolean> reference = new HashMap<>();
-        for (String str : strings){
+        for (String str : strings) {
             steps++;
-            if (!reference.containsKey(str)){
+            if (!reference.containsKey(str)) {
                 reference.put(str, true);
                 continue;
             }
@@ -115,16 +117,16 @@ public class Main {
         return null;
     }
 
-    private static String missingFromAlphabet(String str){
+    private static String missingFromAlphabet(String str) {
         HashMap<String, Boolean> reference = new HashMap<>();
 
-        for (Character letter : str.toCharArray()){
+        for (Character letter : str.toCharArray()) {
             reference.put(letter.toString(), true);
         }
 
         String alphabet = "abcdefghijklmnopqrstuvwxyz";
-        for (Character letter : alphabet.toCharArray()){
-            if (!reference.containsKey(letter.toString())){
+        for (Character letter : alphabet.toCharArray()) {
+            if (!reference.containsKey(letter.toString())) {
                 return letter.toString();
             }
         }
@@ -132,15 +134,15 @@ public class Main {
         return null;
     }
 
-    private static String firdFirstNonDuplicated(String hay){
+    private static String firdFirstNonDuplicated(String hay) {
         HashMap<Character, Integer> reference = new HashMap<>();
 
-        for (Character cr : hay.toCharArray()){
+        for (Character cr : hay.toCharArray()) {
             reference.put(cr, reference.getOrDefault(cr, 0) + 1);
         }
 
-        for (Character cr : hay.toCharArray()){
-            if (reference.get(cr) == 1){
+        for (Character cr : hay.toCharArray()) {
+            if (reference.get(cr) == 1) {
                 return cr.toString();
             }
         }
@@ -148,16 +150,16 @@ public class Main {
         return null;
     }
 
-    private static String reverseString(String toReverse){
+    private static String reverseString(String toReverse) {
         System.out.printf("String to reverse: %s%n", toReverse);
 
         SelfStack<Character> stack = new SelfStack<>();
-        for (Character ch : toReverse.toCharArray()){
+        for (Character ch : toReverse.toCharArray()) {
             stack.push(ch);
         }
 
         StringBuilder sb = new StringBuilder();
-        while (stack.read() != null){
+        while (stack.read() != null) {
             sb.append(stack.pop());
         }
 
@@ -167,37 +169,66 @@ public class Main {
     public static class SelfStack<T> {
         private final List<T> stack;
 
-        public SelfStack(){
+        public SelfStack() {
             stack = new ArrayList<>();
         }
 
-        public void push(T value){
+        public void push(T value) {
             stack.add(value);
         }
 
-        public T read(){
+        public T read() {
             if (stack.isEmpty()) return null;
 
             return stack.getLast();
         }
 
-        public T pop(){
+        public T pop() {
             if (stack.isEmpty()) return null;
 
             return stack.removeLast();
         }
     }
 
-    private static void recursivePrint(List<Object> list, int depth){
-        for (Object obj : list){
-            if (obj instanceof Integer){
+    private static void recursivePrint(List<Object> list, int depth) {
+        for (Object obj : list) {
+            if (obj instanceof Integer) {
                 System.out.printf("%s%d%n", "-----".repeat(depth), obj);
                 continue;
             }
 
-            if (obj instanceof List<?>){
-                recursivePrint((List<Object>) obj, depth+1);
+            if (obj instanceof List<?>) {
+                recursivePrint((List<Object>) obj, depth + 1);
             }
         }
+    }
+
+    // Recursion Chapter 11
+    private static int recursivelyCountNumberOfCharacters(List<String> strings, int index) {
+        if (index >= strings.size()) return 0;
+
+        return strings.get(index).length() + recursivelyCountNumberOfCharacters(strings, index+1);
+    }
+
+    private static List<Integer> recursivelyFilterOnlyEven(List<Integer> nums, List<Integer> evens, int index){
+        if (index >= nums.size()) return evens;
+        if (nums.get(index) % 2 == 0) evens.add(nums.get(index));
+        return recursivelyFilterOnlyEven(nums, evens, index + 1);
+    }
+
+    private static int findTriangularNumberOnPosition(int position){
+        if (position <= 0) return 0;
+        return findTriangularNumberOnPosition(position - 1) + position;
+    }
+
+    private static int findFirstXRecursively(String str, int index){
+        if (index >= str.length()) return -1;
+        if (str.charAt(index) == 'x') return index;
+        return findFirstXRecursively(str, index + 1);
+    }
+
+    private static int findNumberOfShortestPaths(int rows, int cols){
+        if (rows == 1 || cols == 1) return 1;
+        return findNumberOfShortestPaths(rows - 1, cols) + findNumberOfShortestPaths(rows, cols - 1);
     }
 }
