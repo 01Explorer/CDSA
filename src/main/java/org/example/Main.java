@@ -4,6 +4,7 @@ import java.io.ObjectStreamException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Stack;
 
@@ -230,5 +231,31 @@ public class Main {
     private static int findNumberOfShortestPaths(int rows, int cols){
         if (rows == 1 || cols == 1) return 1;
         return findNumberOfShortestPaths(rows - 1, cols) + findNumberOfShortestPaths(rows, cols - 1);
+    }
+
+    private static int addUntil100(List<Integer> array){
+        if (array.isEmpty()) return 0;
+        int sum = addUntil100(array.subList(1, array.size() - 1));
+        if (array.getFirst() + sum > 100){
+            return sum;
+        }
+        return array.getFirst() + sum;
+    }
+
+    private static int golomb(int n, Map<Integer, Integer> memo){
+        if (n == 1) return 1;
+        if (!memo.containsKey(n)){
+            memo.put(n, 1 + golomb(n - golomb(golomb(n - 1, memo), memo), memo));
+        }
+        return memo.get(n);
+    }
+
+    private static int uniquePaths(int rows, int cols, Map<int[], Integer> memo){
+        if (rows == 1 || cols == 1) return 1;
+        if (!memo.containsKey(new int[]{rows, cols})){
+            memo.put(new int[]{rows, cols}, uniquePaths(rows - 1, cols, memo) + uniquePaths(rows, cols - 1, memo));
+        }
+
+        return memo.get(new int[]{rows, cols});
     }
 }
