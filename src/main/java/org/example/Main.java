@@ -2,6 +2,7 @@ package org.example;
 
 import java.io.ObjectStreamException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,7 @@ public class Main {
 
 //        List<Object> list = List.of(1, 2, 3, List.of(4,5,6), 7, List.of(8, List.of(9, 10, 11, List.of(12, 13, 14))), List.of(15, 16, 17, 18, 19, List.of(20, 21, 22, List.of(23, 24, 25, List.of(26, 27, 29), 30, 31)),32), 33);
 
-        System.out.printf("%nResult --> %s", findNumberOfShortestPaths(3, 3));
+        System.out.printf("%nResult --> %s", findGreatestNumberN(arrayGenerator(20, false)));
 //        recursivePrint(list, 1);
 
 
@@ -257,5 +258,47 @@ public class Main {
         }
 
         return memo.get(new int[]{rows, cols});
+    }
+
+    private static int greatestProductOfAnyThreeNumbers(List<Integer> array){
+        array.sort(Comparator.reverseOrder());
+        return array.get(0) * array.get(1) * array.get(2);
+    }
+
+    private static int findMissingNumber(List<Integer> array){
+        array.sort(Comparator.naturalOrder());
+        for (int i = 0; i < array.size(); i++) {
+            if (array.get(i) != i) return i;
+        }
+
+        return -1;
+    }
+
+    private static int findGreatestNumberNSquared(List<Integer> array){
+        int max = 0;
+        for (int i = 0; i < array.size(); i++) {
+            for (Integer integer : array) {
+                if (array.get(i) > integer && array.get(i) > max) {
+                    max = array.get(i);
+                } else if (integer > max) {
+                    max = integer;
+                }
+            }
+        }
+        return max;
+    }
+
+    private static int findGreatestNumberNLogN(List<Integer> array){
+        array.sort(Comparator.reverseOrder());
+        return array.getFirst();
+    }
+
+    private static int findGreatestNumberN(List<Integer> array){
+        int max = array.getFirst();
+        for (Integer num : array){
+            if (num > max) max = num;
+        }
+
+        return max;
     }
 }
