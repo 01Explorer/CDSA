@@ -11,19 +11,18 @@ import java.util.Stack;
 
 public class Main {
     static void main() {
-        BinarySearchTree bst = new BinarySearchTree();
-        bst.insert(1);
-        bst.insert(5);
-        bst.insert(9);
-        bst.insert(2);
-        bst.insert(4);
-        bst.insert(10);
-        bst.insert(6);
-        bst.insert(3);
-        bst.insert(8);
+        Trie trie = new Trie();
+        trie.insert("get");
+        trie.insert("go");
+        trie.insert("got");
+        trie.insert("gotten");
+        trie.insert("hall");
+        trie.insert("ham");
+        trie.insert("hill");
+        trie.insert("hammer");
+        trie.insert("zebra");
 
-        bst.print();
-        System.out.println("Max Node Value --> " + bst.findGreatestValue(bst.root));
+        System.out.println(trie.autocorrect("gol"));
     }
 
     private static List<Integer> arrayGenerator(int size, boolean sorted) {
