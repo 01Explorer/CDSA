@@ -11,29 +11,19 @@ import java.util.Stack;
 
 public class Main {
     static void main() {
-//        int size = 100;
-//        boolean sorted = true;
-//        List<Integer> hay = arrayGenerator(size, sorted);
-//        System.out.printf("%nResult --> %d", binarySearch(hay, new Random().nextInt(0, size)));
+        BinarySearchTree bst = new BinarySearchTree();
+        bst.insert(1);
+        bst.insert(5);
+        bst.insert(9);
+        bst.insert(2);
+        bst.insert(4);
+        bst.insert(10);
+        bst.insert(6);
+        bst.insert(3);
+        bst.insert(8);
 
-//        List<Object> list = List.of(1, 2, 3, List.of(4,5,6), 7, List.of(8, List.of(9, 10, 11, List.of(12, 13, 14))), List.of(15, 16, 17, 18, 19, List.of(20, 21, 22, List.of(23, 24, 25, List.of(26, 27, 29), 30, 31)),32), 33);
-
-//        System.out.printf("%nResult --> %s", findGreatestNumberN(arrayGenerator(20, false)));
-//        recursivePrint(list, 1);
-        Node<Integer> node4 = new Node<>(null, 4);
-        Node<Integer> node3 = new Node<>(node4, 3);
-        Node<Integer> node2 = new Node<>(node3, 2);
-        Node<Integer> root = new Node<>(node2,  1);
-//        node2.setPrevious(root);
-//        node3.setPrevious(node2);
-//        node4.setPrevious(node3);
-//        DoublyLinkedList<Integer> linkedList = new DoublyLinkedList<Integer>(root, node4);
-//        linkedList.printAllReverse();
-        LinkedList<Integer> linkedList = new LinkedList<>(root);
-        linkedList.setRoot(linkedList.reverse());
-//        System.out.println("Last element --> " + linkedList.getLastElement().getValue());
-        linkedList.printAll();
-
+        bst.print();
+        System.out.println("Max Node Value --> " + bst.findGreatestValue(bst.root));
     }
 
     private static List<Integer> arrayGenerator(int size, boolean sorted) {
