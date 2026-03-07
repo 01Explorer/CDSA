@@ -11,25 +11,21 @@ import java.util.Stack;
 
 public class Main {
     static void main() {
-        Vertex<String> idris = new Vertex<>("Idris");
-        Vertex<String> kamil = new Vertex<>("Kamil");
-        Vertex<String> lina = new Vertex<>("Lina");
-        Vertex<String> sasha = new Vertex<>("Sasha");
-        Vertex<String> talia = new Vertex<>("Talia");
-        Vertex<String> ken = new Vertex<>("Ken");
-        Vertex<String> marco = new Vertex<>("Marco");
+        List<Integer> array = new ArrayList<>();
+        array.add(0);
+        array.add(1);
+        array.add(2);
+        array.add(3);
+        array.add(4);
+        array.add(5);
+        array.add(6);
+        array.add(7);
+        array.add(8);
+        array.add(9);
 
-        idris.addAdjacentVertex(kamil);
-        idris.addAdjacentVertex(talia);
-        kamil.addAdjacentVertex(lina);
-        lina.addAdjacentVertex(sasha);
-        sasha.addAdjacentVertex(marco);
-        marco.addAdjacentVertex(ken);
-        ken.addAdjacentVertex(talia);
-        talia.addAdjacentVertex(idris);
-
-//        IO.println("Found Value --> " + Graph.bfsSearch(a, "k"));
-        IO.println("Found Path: " + Graph.shortestPath(idris, ken));
+        IO.println("Standard -> " + array);
+        reverseArrayInPlace(array);
+        IO.println("Reversed -> " + array);
     }
 
     private static List<Integer> arrayGenerator(int size, boolean sorted) {
@@ -308,6 +304,15 @@ public class Main {
         }
 
         return max;
+    }
+
+    private static <T> void reverseArrayInPlace(List<T> array){
+        for (int i = 0; i < array.size() / 2; i++){
+            int pos = array.size() - i - 1;
+            var temp = array.get(pos);
+            array.set(pos, array.get(i));
+            array.set(i, temp);
+        }
     }
 
     
