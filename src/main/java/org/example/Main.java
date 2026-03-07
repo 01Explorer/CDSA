@@ -11,18 +11,25 @@ import java.util.Stack;
 
 public class Main {
     static void main() {
-        Trie trie = new Trie();
-        trie.insert("get");
-        trie.insert("go");
-        trie.insert("got");
-        trie.insert("gotten");
-        trie.insert("hall");
-        trie.insert("ham");
-        trie.insert("hill");
-        trie.insert("hammer");
-        trie.insert("zebra");
+        Vertex<String> idris = new Vertex<>("Idris");
+        Vertex<String> kamil = new Vertex<>("Kamil");
+        Vertex<String> lina = new Vertex<>("Lina");
+        Vertex<String> sasha = new Vertex<>("Sasha");
+        Vertex<String> talia = new Vertex<>("Talia");
+        Vertex<String> ken = new Vertex<>("Ken");
+        Vertex<String> marco = new Vertex<>("Marco");
 
-        System.out.println(trie.autocorrect("gol"));
+        idris.addAdjacentVertex(kamil);
+        idris.addAdjacentVertex(talia);
+        kamil.addAdjacentVertex(lina);
+        lina.addAdjacentVertex(sasha);
+        sasha.addAdjacentVertex(marco);
+        marco.addAdjacentVertex(ken);
+        ken.addAdjacentVertex(talia);
+        talia.addAdjacentVertex(idris);
+
+//        IO.println("Found Value --> " + Graph.bfsSearch(a, "k"));
+        IO.println("Found Path: " + Graph.shortestPath(idris, ken));
     }
 
     private static List<Integer> arrayGenerator(int size, boolean sorted) {
