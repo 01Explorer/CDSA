@@ -11,21 +11,39 @@ import java.util.Stack;
 
 public class Main {
     static void main() {
-        List<Integer> array = new ArrayList<>();
-        array.add(0);
-        array.add(1);
-        array.add(2);
-        array.add(3);
-        array.add(4);
-        array.add(5);
-        array.add(6);
-        array.add(7);
-        array.add(8);
-        array.add(9);
+//        List<Player> basketballPlayers = List.of(
+//                new Player("Jill", "Huang", "Gators"),
+//                new Player("Janko", "Barton", "Sharks"),
+//                new Player("Wanda", "Vakulskas", "Sharks"),
+//                new Player("Jill", "Moloney", "Gators"),
+//                new Player("Luuk", "Watkins", "Gators")
+//        );
+//
+//        List<Player> footballPlayers = List.of(
+//                new Player("Hanzla", "Radozti", "32ers"),
+//                new Player("Tina", "Watkins", "Barleycorns"),
+//                new Player("Alex", "Patel", "32ers"),
+//                new Player("Jill", "Huang", "Barleycorns"),
+//                new Player("Wanda", "Vakulskas", "Gators")
+//        );
+//
+//        IO.println("Repeated Players --> " + findPlayersInBothSports(basketballPlayers, footballPlayers));
+//
+//        List<Integer> nums = List.of(2, 3, 0, 6, 1, 5);
+//
+//        IO.println("Missing Number -> " + findMissingnNumber(nums));
 
-        IO.println("Standard -> " + array);
-        reverseArrayInPlace(array);
-        IO.println("Reversed -> " + array);
+//        List<Integer> prices = List.of(10, 7, 5, 8, 11, 2, 6);
+//        IO.println("Max Profit -> " + mostStockProfit(prices));
+
+//        List<Integer> numbers = List.of(5, -10, -6, 9, 4);
+//        IO.println("Greatest Product -> " + greatestProduct(numbers));
+
+//        List<Double> temperatures = List.of(98.6, 98.0, 97.1, 99.0, 98.9, 97.8, 98.5, 98.2, 98.0, 97.1);
+//        IO.println("Ordered Temperatures -> " + orderTemperatures(temperatures));
+
+        List<Integer> numbers = List.of(19, 13, 15, 12, 18, 14, 17, 11);
+        IO.println("Maximum Sequence -> " + largestSequence(numbers));
     }
 
     private static List<Integer> arrayGenerator(int size, boolean sorted) {
@@ -213,63 +231,63 @@ public class Main {
     private static int recursivelyCountNumberOfCharacters(List<String> strings, int index) {
         if (index >= strings.size()) return 0;
 
-        return strings.get(index).length() + recursivelyCountNumberOfCharacters(strings, index+1);
+        return strings.get(index).length() + recursivelyCountNumberOfCharacters(strings, index + 1);
     }
 
-    private static List<Integer> recursivelyFilterOnlyEven(List<Integer> nums, List<Integer> evens, int index){
+    private static List<Integer> recursivelyFilterOnlyEven(List<Integer> nums, List<Integer> evens, int index) {
         if (index >= nums.size()) return evens;
         if (nums.get(index) % 2 == 0) evens.add(nums.get(index));
         return recursivelyFilterOnlyEven(nums, evens, index + 1);
     }
 
-    private static int findTriangularNumberOnPosition(int position){
+    private static int findTriangularNumberOnPosition(int position) {
         if (position <= 0) return 0;
         return findTriangularNumberOnPosition(position - 1) + position;
     }
 
-    private static int findFirstXRecursively(String str, int index){
+    private static int findFirstXRecursively(String str, int index) {
         if (index >= str.length()) return -1;
         if (str.charAt(index) == 'x') return index;
         return findFirstXRecursively(str, index + 1);
     }
 
-    private static int findNumberOfShortestPaths(int rows, int cols){
+    private static int findNumberOfShortestPaths(int rows, int cols) {
         if (rows == 1 || cols == 1) return 1;
         return findNumberOfShortestPaths(rows - 1, cols) + findNumberOfShortestPaths(rows, cols - 1);
     }
 
-    private static int addUntil100(List<Integer> array){
+    private static int addUntil100(List<Integer> array) {
         if (array.isEmpty()) return 0;
         int sum = addUntil100(array.subList(1, array.size() - 1));
-        if (array.getFirst() + sum > 100){
+        if (array.getFirst() + sum > 100) {
             return sum;
         }
         return array.getFirst() + sum;
     }
 
-    private static int golomb(int n, Map<Integer, Integer> memo){
+    private static int golomb(int n, Map<Integer, Integer> memo) {
         if (n == 1) return 1;
-        if (!memo.containsKey(n)){
+        if (!memo.containsKey(n)) {
             memo.put(n, 1 + golomb(n - golomb(golomb(n - 1, memo), memo), memo));
         }
         return memo.get(n);
     }
 
-    private static int uniquePaths(int rows, int cols, Map<int[], Integer> memo){
+    private static int uniquePaths(int rows, int cols, Map<int[], Integer> memo) {
         if (rows == 1 || cols == 1) return 1;
-        if (!memo.containsKey(new int[]{rows, cols})){
+        if (!memo.containsKey(new int[]{rows, cols})) {
             memo.put(new int[]{rows, cols}, uniquePaths(rows - 1, cols, memo) + uniquePaths(rows, cols - 1, memo));
         }
 
         return memo.get(new int[]{rows, cols});
     }
 
-    private static int greatestProductOfAnyThreeNumbers(List<Integer> array){
+    private static int greatestProductOfAnyThreeNumbers(List<Integer> array) {
         array.sort(Comparator.reverseOrder());
         return array.get(0) * array.get(1) * array.get(2);
     }
 
-    private static int findMissingNumber(List<Integer> array){
+    private static int findMissingNumberWithOrdering(List<Integer> array) {
         array.sort(Comparator.naturalOrder());
         for (int i = 0; i < array.size(); i++) {
             if (array.get(i) != i) return i;
@@ -278,7 +296,7 @@ public class Main {
         return -1;
     }
 
-    private static int findGreatestNumberNSquared(List<Integer> array){
+    private static int findGreatestNumberNSquared(List<Integer> array) {
         int max = 0;
         for (int i = 0; i < array.size(); i++) {
             for (Integer integer : array) {
@@ -292,22 +310,22 @@ public class Main {
         return max;
     }
 
-    private static int findGreatestNumberNLogN(List<Integer> array){
+    private static int findGreatestNumberNLogN(List<Integer> array) {
         array.sort(Comparator.reverseOrder());
         return array.getFirst();
     }
 
-    private static int findGreatestNumberN(List<Integer> array){
+    private static int findGreatestNumberN(List<Integer> array) {
         int max = array.getFirst();
-        for (Integer num : array){
+        for (Integer num : array) {
             if (num > max) max = num;
         }
 
         return max;
     }
 
-    private static <T> void reverseArrayInPlace(List<T> array){
-        for (int i = 0; i < array.size() / 2; i++){
+    private static <T> void reverseArrayInPlace(List<T> array) {
+        for (int i = 0; i < array.size() / 2; i++) {
             int pos = array.size() - i - 1;
             var temp = array.get(pos);
             array.set(pos, array.get(i));
@@ -315,5 +333,144 @@ public class Main {
         }
     }
 
-    
+    private static List<String> findPlayersInBothSports(List<Player> sport1, List<Player> sport2) {
+        Map<String, Boolean> sport1Ref = new HashMap<>();
+
+        for (Player player : sport1) {
+            sport1Ref.putIfAbsent(player.fullName(), true);
+        }
+
+        List<String> repeatedPlayers = new ArrayList<>();
+
+        for (Player player : sport2) {
+            if (sport1Ref.containsKey(player.fullName())) {
+                repeatedPlayers.add(player.fullName());
+            }
+        }
+
+        return repeatedPlayers;
+    }
+
+    private static int findMissingnNumber(List<Integer> array) {
+        int currentSum = 0;
+        int fullSum = 0;
+
+        for (int i = 0; i <= array.size(); i++) {
+            fullSum += i;
+        }
+
+        for (Integer num : array) {
+            currentSum += num;
+        }
+
+
+        return fullSum - currentSum;
+    }
+
+    private static int mostStockProfit(List<Integer> prices){
+        int maxProfit = 0;
+        int buyPrice = prices.getFirst();
+
+        for (int i = 1; i < prices.size(); i++){
+            int profit = buyPrice - prices.get(i);
+
+            if (buyPrice > prices.get(i)){
+                buyPrice = prices.get(i);
+                continue;
+            }
+
+            if (maxProfit < profit){
+                maxProfit = profit;
+            }
+
+        }
+
+        return maxProfit;
+    }
+
+    private static int greatestProduct(List<Integer> numbers){
+        int bestProductNegative = 0;
+        int first = numbers.getFirst();
+        int second = numbers.getFirst();
+
+        for (int i = 0; i < numbers.size(); i++){
+            if (numbers.get(i) < second && numbers.get(i) > first){
+                second = numbers.get(i);
+                continue;
+            }
+            if (numbers.get(i) < first) {
+                first = numbers.get(i);
+            }
+        }
+
+        bestProductNegative = first * second;
+
+        first = numbers.getFirst();
+        second = numbers.getFirst();
+        int bestProductPositive = 0;
+
+        for (int i = 0; i < numbers.size(); i++){
+            if (numbers.get(i) > second && numbers.get(i) < first){
+                second = numbers.get(i);
+                continue;
+            }
+            if (numbers.get(i) > first) {
+                first = numbers.get(i);
+            }
+        }
+
+        bestProductPositive = first * second;
+
+        return Math.max(bestProductNegative, bestProductPositive);
+    }
+
+    private static List<Double> orderTemperatures(List<Double> temperatures){
+        Map<Double, Integer> reference = new HashMap<>();
+        for (Double temperature : temperatures){
+            reference.put(temperature, reference.getOrDefault(temperature, 0) + 1);
+        }
+
+        IO.println(reference);
+
+        List<Double> ordered = new ArrayList<>();
+
+        // Multiply by 10X to remove floating points operation errors
+        for (int i = 970; i <= 990; i++){
+            IO.println(i);
+            for (int j = 0; j < reference.getOrDefault(i / 10., 0); j++){
+                ordered.add(i / 10.);
+            }
+        }
+
+        return ordered;
+    }
+
+    private static int largestSequence(List<Integer> numbers){
+        Map<Integer, Boolean> aux = new HashMap<>();
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+
+        for (Integer num : numbers){
+            aux.put(num, true);
+            if (num < min) min = num;
+            if (num > max) max = num;
+        }
+
+        int greatestSequence = 0;
+        int sequence = 1;
+
+        for (int i = min; i <= max; i++){
+            if (aux.containsKey(i + 1)) {
+                sequence++;
+                continue;
+            }
+            if (sequence > greatestSequence){
+                greatestSequence = sequence;
+            }
+            sequence = 1;
+        }
+
+        return greatestSequence;
+    }
+
 }
